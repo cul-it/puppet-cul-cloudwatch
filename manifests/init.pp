@@ -57,7 +57,15 @@ class cloudwatch {
     monthday => '*',
     month    => '*',
     weekday  => '*',
-    command  => '/opt/aws-scripts-mon/mon-put-instance-data.pl --mem-util --mem-used --mem-avail --swap-util --swap-used --disk-path=/ --disk-space-util --disk-space-used --disk-space-avail --from-cron',
+    command  => '/opt/aws-scripts-mon/mon-put-instance-data.pl --mem-util --mem-used --mem-avail --swap-util --swap-used --disk-path=/ --disk-space-util --disk-space-used --disk-space-avail --from-cron --aws-credential-file=/cul/share/.awscreds',
+    require  => File['/cul/share/.awscreds'],
   }
-
+  
+  file { '/cul/share/.awscreds':
+    ensure => present,
+    source  => "puppet:///modules/cul_cloudwatch/awscreds.txt",
+    owner  => "root",
+    group  => "root",
+    mode   => "0600",
+  }
 }
