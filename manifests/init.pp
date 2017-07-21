@@ -45,6 +45,7 @@ class cloudwatch {
     extension     => 'zip',
     target        => '/opt',
     digest_string => '939508e2fed7620625ba43fbd2668c6b',
+    creates       => '/opt/aws-scripts-mon',
     src_target    => '/tmp'
   }
 
