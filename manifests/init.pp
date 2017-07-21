@@ -57,7 +57,7 @@ class cloudwatch {
     monthday => '*',
     month    => '*',
     weekday  => '*',
-    command  => '/opt/aws-scripts-mon/mon-put-instance-data.pl --mem-util --mem-used --mem-avail --swap-util --swap-used --disk-path=/ --disk-space-util --disk-space-used --disk-space-avail --from-cron --aws-credential-file=/cul/share/.awscreds',
+    command  => '/opt/aws-scripts-mon/mon-put-instance-data.pl --mem-util --mem-used --mem-avail --swap-util --swap-used --disk-path=/ --disk-path=/cul --disk-space-util --disk-space-used --disk-space-avail --from-cron --aws-credential-file=/cul/share/.awscreds',
     require  => File['/cul/share/.awscreds'],
   }
   
