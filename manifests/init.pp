@@ -63,7 +63,7 @@ class cloudwatch {
   
   file { '/cul/share/.awscreds':
     ensure => present,
-    source  => "puppet:///modules/cul_cloudwatch/awscreds.txt",
+    source  => "puppet:///modules/cloudwatch/awscreds.txt",
     owner  => "root",
     group  => "root",
     mode   => "0600",
