@@ -17,8 +17,11 @@
 #
 # Copyright 2016 Joe Nyland, unless otherwise noted.
 #
-class cloudwatch {
-
+class cloudwatch (
+    $additional_disks = undef
+#use format: --disk=/foo1 --disk=/foo2
+)
+{
   # Establish which packages are needed, depending on the OS family
   case $::operatingsystem {
     /(RedHat|CentOS|Fedora)$/: { $packages = [
@@ -58,7 +61,7 @@ class cloudwatch {
     monthday => '*',
     month    => '*',
     weekday  => '*',
-    command  => '/opt/aws-scripts-mon/mon-put-instance-data.pl --mem-util --mem-used --mem-avail --swap-util --swap-used --disk-path=/ --disk-path=/cul --disk-space-util --disk-space-used --disk-space-avail --from-cron --aws-credential-file=/cul/share/.awscreds',
+    command  => "/opt/aws-scripts-mon/mon-put-instance-data.pl --mem-util --mem-used --mem-avail --swap-util --swap-used --disk-path=/ --disk-path=/cul ${additional_disks} --disk-space-util --disk-space-used --disk-space-avail --from-cron --aws-credential-file=/cul/share/.awscreds",
     require  => File['/cul/share/.awscreds'],
   }
   
