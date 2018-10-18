@@ -110,26 +110,25 @@
 # Copyright
 # ---------
 #
-<<<<<<< HEAD
 # Copyright 2016 Joe Nyland, unless otherwise noted.
 #
-class cloudwatch (
-    $additional_disks = undef
+#class cloudwatch (
+#    $additional_disks = undef
 #use format: --disk=/foo1 --disk=/foo2
-)
-{
-  # Establish which packages are needed, depending on the OS family
-  case $::operatingsystem {
-    /(RedHat|CentOS|Fedora)$/: { $packages = [
-      'perl-Switch', 'perl-DateTime', 'perl-Sys-Syslog',
-      'perl-LWP-Protocol-https', 'perl-Digest-SHA', 'unzip'] }
-    'Amazon': { $packages = ['perl-Switch', 'perl-DateTime',
-      'perl-Sys-Syslog', 'perl-LWP-Protocol-https', 'unzip'] }
-    /(Ubuntu|Debian)$/: { $packages = ['unzip', 'libwww-perl',
-      'libdatetime-perl'] }
-    default: {
-      fail("Module cloudwatch is not supported on ${::operatingsystem}")
-=======
+#)
+#{
+#  # Establish which packages are needed, depending on the OS family
+#  case $::operatingsystem {
+#    /(RedHat|CentOS|Fedora)$/: { $packages = [
+#      'perl-Switch', 'perl-DateTime', 'perl-Sys-Syslog',
+#      'perl-LWP-Protocol-https', 'perl-Digest-SHA', 'unzip'] }
+#    'Amazon': { $packages = ['perl-Switch', 'perl-DateTime',
+#      'perl-Sys-Syslog', 'perl-LWP-Protocol-https', 'unzip'] }
+#    /(Ubuntu|Debian)$/: { $packages = ['unzip', 'libwww-perl',
+#      'libdatetime-perl'] }
+#    default: {
+#      fail("Module cloudwatch is not supported on ${::operatingsystem}")
+#=======
 # Copyright 2018 Joe Nyland, unless otherwise noted.
 #
 class cloudwatch (
@@ -187,7 +186,6 @@ class cloudwatch (
       source       => $zip_url,
       creates      => $install_dir,
       require      => Package[$packages]
->>>>>>> upstream/master
     }
   } else {
     archive { $zip_name:
@@ -253,7 +251,6 @@ class cloudwatch (
     $swap_used = ''
   }
 
-<<<<<<< HEAD
   # Download and extract the scripts from AWS
   archive { 'CloudWatchMonitoringScripts-1.2.1':
     ensure        => present,
@@ -285,7 +282,6 @@ class cloudwatch (
     group  => "root",
     mode   => "0600",
   }
-=======
   $memory_units_val = "--memory-units=${memory_units}"
 
   $disk_path_val = rstrip(inline_template('<% @disk_path.each do |path| -%>--disk-path=<%=path%> <%end-%>'))
@@ -364,5 +360,4 @@ class cloudwatch (
       require  => Archive[$zip_name]
     }
   }
->>>>>>> upstream/master
 }
